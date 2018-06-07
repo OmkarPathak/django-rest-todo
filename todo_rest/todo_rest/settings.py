@@ -26,7 +26,7 @@ SECRET_KEY = '8wasfi-2#sk=a5_&sjlgxq)trqmp)u5=9u-0_y_77czp3gtwda'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'todo',
 ]
 
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'todo_rest.urls'
@@ -130,16 +132,16 @@ STATIC_URL = '/static/'
 #     ]
 # }
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ),
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.BasicAuthentication',
+#     ),
+# }
 
 # JWT_AUTH = { 
 #     'JWT_AUTH_HEADER_PREFIX': 'JWT',
@@ -147,5 +149,8 @@ REST_FRAMEWORK = {
 # }
 
 JWT_AUTH = { 
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=10),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
+
+CORS_ORIGIN_ALLOW_ALL = True

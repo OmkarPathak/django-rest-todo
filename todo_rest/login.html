@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+AngularJs $http Service Example
+</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.10/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module('serviceApp', []);
+    app.controller('serviceCtrl', function ($scope, $http) {
+        $scope.myFunc = function() {
+            $http({
+                method: 'GET',
+                url: 'http://127.0.0.1:8000/api/tasks/'
+            }).then(function success(response) {
+                    $scope.myWelcome = response.data;
+                }, function error(response) {
+                    $scope.error = response.data.detail;
+            });
+        }
+    });
+</script>
+</head>
+<body>
+    <div ng-app="serviceApp" ng-controller="serviceCtrl">
+        <button ng-click="myFunc()">Show All Tasks!</button>
+        <br>
+        You have the following notes:
+        <div>{{error}}</div>
+        <br>
+        <br>
+        <div ng-repeat="item in myWelcome">
+            ID: {{item.id}}
+            <br>
+            Title: {{item.title}}
+            <br>
+            Description: {{item.description}}
+            <br>
+            <br>
+        </div>
+    </div>
+</body>
+</html
