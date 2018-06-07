@@ -8,6 +8,7 @@ AngularJs $http Service Example
 <script type="text/javascript">
     var app = angular.module('serviceApp', []);
     app.controller('serviceCtrl', function ($scope, $http) {
+        // to show all tasks
         $scope.myFunc = function() {
             $http({
                 method: 'GET',
@@ -18,19 +19,52 @@ AngularJs $http Service Example
                     $scope.error = response.data.detail;
             });
         }
+
+        // to show a particular task
+        $scope.showTask = function(id) {
+            alert(id);
+            $http({
+                method: 'GET',
+                url: 'http://127.0.0.1:8000/api/tasks/'+id+'/'
+            }).then(function success(response) {
+                    $scope.myWelcome = response.data;
+                }, function error(response) {
+                    $scope.error = response.data.detail;
+            });
+        }
     });
+
+    // var loginapp = angular.module('loginApp', []);
+    // loginapp.controller('loginController', function ($scope, $http) {
+    //     // init showForm to false;
+    //     $scope.showForm = false;
+
+    //     // init empty user object for our form
+    //     $scope.user = {};
+
+    //     $scope.submitForm = function() {
+    //     // logic when the form is submitted
+    //     //...
+
+    //         // reset the user
+    //         $scope.user = {};
+
+    //         // finally hide the form
+    //         $scope.showForm = false;
+    //     };
+    // });
 </script>
 </head>
 <body>
+    <!-- For retrieving all tasks -->
     <div ng-app="serviceApp" ng-controller="serviceCtrl">
         <button ng-click="myFunc()">Show All Tasks!</button>
-        <br>
-        You have the following notes:
+        <div style="margin-top: 2%;" ng-if="myWelcome">You have the following notes:</div>
         <div>{{error}}</div>
         <br>
         <br>
         <div ng-repeat="item in myWelcome">
-            ID: {{item.id}}
+            <button onclick="alert({{item.id}})">ID: {{item.id}}</button>
             <br>
             Title: {{item.title}}
             <br>
@@ -39,5 +73,15 @@ AngularJs $http Service Example
             <br>
         </div>
     </div>
+
+    <!-- For loggin in -->
+    <!-- <div ng-app="loginApp" ng-controller="loginController">
+        <button ng-hide="showForm" ng-click="showForm = true">Show form</button>
+        <form ng-show="showForm" ng-submit="submitForm()">
+            <input type="text" name="username" ng-model="user.username" />
+            <input type="password" name="password" ng-model="user.password" />
+            <input type="submit" value="submit" />
+        </form>
+    </div> -->
 </body>
 </html

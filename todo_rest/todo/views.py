@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
 
+# from django.contrib.auth import User
+
 # class TaskSerializerView(viewsets.ModelViewSet):
 #     queryset = Task.objects.all()
 #     serializer_class = TaskSerializer
@@ -47,3 +49,13 @@ def edit_task(request, id):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class UserViewSet(viewsets.HyperlinkedModelModelViewSet):
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'email', 'password')
+#         extra_kwargs = {'password': {'write_only': True, 'required': True}}
+
+#     def create(self, validated_data):
+#         user = User.objects.create_user(**validated_data)
+#         return user
