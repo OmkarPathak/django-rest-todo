@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Welcome to {{ site_title }}!
   </h1>
   <!-- <input [(ngModel)]="register.username" placeholder="Username">
   <br>
@@ -9,7 +9,7 @@
   <br>
   <input [(ngModel)]="register.email" type="email" placeholder="Email please">
   <br> -->
-  <button (click)="show_all_notes()">Show All Notes</button>
+  <!-- <button (click)="show_all_notes()">Show All Notes</button> -->
   <!-- {{tasks}} -->
   <div *ngFor="let task of tasks" style="text-align: left">
     ID: {{task.id}}
@@ -20,5 +20,15 @@
     <br>
     <br>
   </div>
+
+  <form #personForm="ngForm"(ngSubmit)="onSubmit(personForm.value)">     
+    <input name="title" [(ngModel)]="title" placeholder="Title for your note?">
+    <br>
+    <br>
+    <input name="description" [(ngModel)]="description" placeholder="Description for your note?">
+    <br>
+    <br>
+    <button type="submit">Add Todo</button>
+  </form>
 </div>
 
