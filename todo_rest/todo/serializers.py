@@ -7,10 +7,10 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
     
-    def validate_title(self, value):
-        if Task.objects.filter(title=value).exists():
-            raise serializers.ValidationError('Title must be unique!')
-        return value
+    # def validate_title(self, value):
+    #     if Task.objects.filter(title=value).exists():
+    #         raise serializers.ValidationError('Title must be unique!')
+    #     return value
 
 
 # class UserSerializer(serializers.HyperlinkedModelSerializer):

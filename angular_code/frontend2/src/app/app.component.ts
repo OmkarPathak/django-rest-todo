@@ -32,8 +32,8 @@ export class AppComponent{
     this.http.post('http://127.0.0.1:8000/api/tasks/add/', notes).subscribe(status=>this.tasks.push(status)); 
   }
 
-  onEdit(notes: Task){
-    this.http.put('http://127.0.0.1:8000/api/tasks/' + this.id + '/edit/', notes).subscribe(status=>{
+  btnClick(id){
+    this.http.delete('http://127.0.0.1:8000/api/tasks/' + id + '/delete/').subscribe(status=>{
       this.userService.get_all_tasks().subscribe(
         result=>{
           this.tasks = result;
@@ -42,8 +42,15 @@ export class AppComponent{
     });
   }
 
-  btnClick(id){
-    this.http.delete('http://127.0.0.1:8000/api/tasks/' + id + '/delete/').subscribe(status=>this.tasks.splice(this.tasks.indexOf(status)));
+  onEdit(notes: Task){
+    console.log(notes);
+    this.http.put('http://127.0.0.1:8000/api/tasks/' + this.id + '/edit/', notes).subscribe(status=>{
+      this.userService.get_all_tasks().subscribe(
+        result=>{
+          this.tasks = result;
+        }
+      );
+    });
   }
 
   editTask(id){

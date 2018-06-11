@@ -22,9 +22,9 @@
           <th>Delete</th>
         </tr>
       </thead>
-      <tbody *ngFor="let task of tasks">
+      <tbody *ngFor="let task of tasks; let i = index">
         <tr>
-          <td>{{task.id}}</td>
+          <td>{{i + 1}}</td>
           <td>{{task.title}}</td>
           <td>{{task.description}}</td>
           <td><button type="submit" (click)="editTask(task.id);" class="btn btn-warning">Edit</button></td>
@@ -39,9 +39,7 @@
         <form class="col-lg-6" #taskAddForm="ngForm" (ngSubmit)="onSubmit(taskAddForm.value)">     
             <input class="form-control" name="title" [(ngModel)]="title" placeholder="Title for your note?">
             <br>
-            <br>
             <input class="form-control" name="description" [(ngModel)]="description" placeholder="Description for your note?">
-            <br>
             <br>
             <button class="btn btn-primary" type="submit">Add New Task</button>
           </form>
@@ -49,9 +47,7 @@
           <form class="col-lg-6" #taskEditForm="ngForm" (ngSubmit)="onEdit(taskEditForm.value)">     
               <input class="form-control" name="title" [(ngModel)]="etitle" placeholder="Title for your note?">
               <br>
-              <br>
               <input class="form-control" name="description" [(ngModel)]="edescription" placeholder="Description for your note?">
-              <br>
               <br>
               <button class="btn btn-primary" type="submit">Edit Task</button>
           </form>
