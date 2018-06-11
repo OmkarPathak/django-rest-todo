@@ -47,7 +47,7 @@ export class AppComponent{
   }
 
   editTask(id){
-    this.http.get('http://127.0.0.1:8000/api/tasks/' + id + '/').subscribe(status=>{this.id=status.id; this.etitle=status.title;this.edescription=status.description});
+    this.http.get('http://127.0.0.1:8000/api/tasks/' + id + '/').subscribe(data=>{this.id=data['id']; this.etitle=data['title'];this.edescription=data['description']});
   }
 }
 
