@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,9 @@ export class AppComponent{
   site_title = 'My first Django, Angular REST API';
   register;
   tasks;
+
+  title:string;
+  description:string;
   url= 'http://127.0.0.1:8000/api/tasks/';
 
   constructor(private userService:UserService, private http: HttpClient){
@@ -30,18 +34,34 @@ export class AppComponent{
     );
   }
 
-  retrieve_tasks(){
-    return this.http.get('http://127.0.0.1:8000/api/tasks');
+  // retrieve_tasks(){
+  //   return this.http.get('http://127.0.0.1:8000/api/tasks');
+  // }
+
+  onSubmit(notes: Task){
+    this.http.post('http://127.0.0.1:8000/api/tasks/add/', notes).subscribe(status=> console.log(JSON.stringify(status)));
+
+    //this.tasks = this.retrieve_tasks()
   }
 
-  onSubmit(person: Person){
-    this.http.post('http://127.0.0.1:8000/api/tasks/add/', person).subscribe(status=> console.log(JSON.stringify(status)));
+  // btnClick= function () {
+  //   this.router.navigateByUrl('http://127.0.0.1:8000/api/tasks/5/delete/');
+  // };
 
-    this.tasks = this.retrieve_tasks()
-  }
+
+  //newly added ...start
+  // delete_task(task: Person){
+  //   return this.http.get('http://127.0.0.1:8000/api/tasks/5/delete/');
+  // }
+  //...end
+
+  
+
+
+
 }
 
-export interface Person {
+export interface Task {
   title: string;
   description: string;
 }

@@ -12,7 +12,7 @@
   <!-- <button (click)="show_all_notes()">Show All Notes</button> -->
   <!-- {{tasks}} -->
   <div *ngFor="let task of tasks" style="text-align: left">
-    ID: {{task.id}}
+      ID: {{task.id}}                        <!--<button type="submit" (click)="btnClick();">Delete</button>--> 
     <br>
     Title: {{task.title}}
     <br>
@@ -21,7 +21,7 @@
     <br>
   </div>
 
-  <form #personForm="ngForm"(ngSubmit)="onSubmit(personForm.value)">     
+  <form #taskAddForm="ngForm"(ngSubmit)="onSubmit(taskAddForm.value)">     
     <input name="title" [(ngModel)]="title" placeholder="Title for your note?">
     <br>
     <br>
@@ -31,4 +31,6 @@
     <button type="submit">Add Todo</button>
   </form>
 </div>
+
+
 
