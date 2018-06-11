@@ -11,25 +11,52 @@
   <br> -->
   <!-- <button (click)="show_all_notes()">Show All Notes</button> -->
   <!-- {{tasks}} -->
-  <div *ngFor="let task of tasks" style="text-align: left">
-      ID: {{task.id}}                        <!--<button type="submit" (click)="btnClick();">Delete</button>--> 
-    <br>
-    Title: {{task.title}}
-    <br>
-    Description: {{task.description}}
-    <br>
-    <br>
+  <div class="container">
+    <table class="table table-bordered table-stripped">
+      <thead class="thead-dark">
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let task of tasks">
+        <tr>
+          <td>{{task.id}}</td>
+          <td>{{task.title}}</td>
+          <td>{{task.description}}</td>
+          <td><button type="submit" (click)="editTask(task.id);" class="btn btn-warning">Edit</button></td>
+          <td><button type="submit" (click)="btnClick(task.id);" class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <form #taskAddForm="ngForm"(ngSubmit)="onSubmit(taskAddForm.value)">     
-    <input name="title" [(ngModel)]="title" placeholder="Title for your note?">
-    <br>
-    <br>
-    <input name="description" [(ngModel)]="description" placeholder="Description for your note?">
-    <br>
-    <br>
-    <button type="submit">Add Todo</button>
-  </form>
+  <div class="container">
+    <div class="row">
+        <form class="col-lg-6" #taskAddForm="ngForm" (ngSubmit)="onSubmit(taskAddForm.value)">     
+            <input class="form-control" name="title" [(ngModel)]="title" placeholder="Title for your note?">
+            <br>
+            <br>
+            <input class="form-control" name="description" [(ngModel)]="description" placeholder="Description for your note?">
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit">Add New Task</button>
+          </form>
+      
+          <form class="col-lg-6" #taskEditForm="ngForm" (ngSubmit)="onEdit(taskEditForm.value)">     
+              <input class="form-control" name="title" [(ngModel)]="etitle" placeholder="Title for your note?">
+              <br>
+              <br>
+              <input class="form-control" name="description" [(ngModel)]="edescription" placeholder="Description for your note?">
+              <br>
+              <br>
+              <button class="btn btn-primary" type="submit">Edit Task</button>
+          </form>
+    </div>
+  </div>
 </div>
 
 
