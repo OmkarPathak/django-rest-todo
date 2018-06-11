@@ -3,15 +3,9 @@
   <h1>
     Welcome to {{ site_title }}!
   </h1>
-  <!-- <input [(ngModel)]="register.username" placeholder="Username">
-  <br>
-  <input [(ngModel)]="register.password" type="password" placeholder="Password">
-  <br>
-  <input [(ngModel)]="register.email" type="email" placeholder="Email please">
-  <br> -->
-  <!-- <button (click)="show_all_notes()">Show All Notes</button> -->
-  <!-- {{tasks}} -->
-  <div class="container">
+
+  <app-login></app-login>
+  <div class="container" *ngIf='logged_in'>
     <table class="table table-bordered table-stripped">
       <thead class="thead-dark">
         <tr>
@@ -32,9 +26,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-  <div class="container">
     <div class="row">
         <form class="col-lg-6" #taskAddForm="ngForm" (ngSubmit)="onSubmit(taskAddForm.value)">     
             <input class="form-control" name="title" [(ngModel)]="title" placeholder="Title for your note?">

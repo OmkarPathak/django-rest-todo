@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { UserService } from './user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { Router } from '@angular/router';
@@ -9,11 +9,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./app.component.css', "../../node_modules/bootstrap/dist/css/bootstrap.min.css",],
   providers: [UserService]
 })
+
 export class AppComponent{
   site_title = 'My first Django, Angular REST API';
   register;
   tasks;
   id;
+  logged_in=false;
   title:string;
   description:string;
   etitle:string;
@@ -26,6 +28,8 @@ export class AppComponent{
         this.tasks = result;
       }
     );
+
+    // @Input('logged_in') this.logged_in;
   }
 
   onSubmit(notes: Task){
